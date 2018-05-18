@@ -1,4 +1,4 @@
-# List-Implementation
+# List Implementation
 
 ## Description
 Repo for a entire implementation of List library. Done as asked by my professor at Universidade Federal do Rio Grande do Norte([UFRN](www.ufrn.br)).
