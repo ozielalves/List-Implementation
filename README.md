@@ -31,15 +31,15 @@ The whole code was made based on the std List, so the objective of this implemen
 
 ## TODO
 
-- [ ] The list ADT
+- [ ] **The list ADT**
     - [ ] Constructors, Destructos and Assigment
     - [ ] Common operations to all list implementations
     - [ ] Opertor overloading - non-member funtions
-- [ ] Iterators
+- [ ] **Iterators**
   - [ ] Getting an Iterator
   - [ ] Iterator operations
   - [ ] List container operations that require iterators
-- [ ] Implementation
+- [ ] **Implementation**
   - [ ] Drive code
 
 ## Authorship
