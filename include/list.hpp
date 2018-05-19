@@ -1,5 +1,22 @@
+/**
+ * @file list.hpp
+ * @version 1.0
+ * @date May, 19.
+ * @author Daniel Guerra and Oziel Alves
+ * @title Class ls::list
+ * @brief List class's declaration
+ */
+
 #ifndef _LIST_HPP_
 #define _LIST_HPP_
+
+#include <iostream> // cin,cout
+#include <exception> // out_of_range throw
+#include <algorithm> //copy
+#include <iterator> // ostream_iterator
+#include <cstdlib> // size_t
+#include <initializer_list> // initializer_list
+#include <cassert> // assert
 
 namespace ls{
 
@@ -24,7 +41,7 @@ namespace ls{
 	
 
 		public:
-			class const_iterator {
+			class /*List<T>::*/const_iterator {
 				
 				//! @brief const_iterator constructor.
 				const_iterator(){};
@@ -37,7 +54,7 @@ namespace ls{
 				const_iterator & operator++ ();
 			
 				//! @brief Overloads the operator '++' (parameter usage).
-				const_iterator operador++ (int);
+				const_iterator operator++ (int);
 
 				//! @brief Overloads the operator '--' (no parameter usage).
 				const_iterator & operator-- ();
@@ -55,53 +72,53 @@ namespace ls{
 					Node *m_node; //!<
 
 					//! @brief
-					const_iterator(Node *p) : current(p);
+					const_iterator(Node *p) : m_node(p) {}
 
 					friend class List<T>; //!< Makes the class a 'List''s friend to use it's members.
 
 			};
 
-			class iterator : public const_iterator{
+			class /*List<T>::*/iterator : public const_iterator{
 
 				public:
 					//! @brief iterator's constructor.
 					iterator() : const_iterator(){}
 					
-					//! @brief Overloads 
+					//! @brief Overloads the operator '*'. (const)
 					const T & operator* () const;
 			
-					//! @brief
-					Object & operator* ();
+					//! @brief Overloads the operator '*'.
+					T &operator* ();
 					
-					//! @brief
+					//! @brief Overloads the operator '++' (no parameter usage).
 					iterator & operator++ ();
 
-					//! @brief
+					//! @brief Overloads the operator '++' (parameter usage).
 					iterator operator++ (int);
 
-					//! @brief
+					//! @brief Overloads the operator '--' (no parameter usage).
 					iterator & operator-- ();
 
-					//! @brief
+					//! @brief Overloads the operator '--' (parameter usage).
 					iterator operator-- (int);
 
 				protected:
 					//! @brief
-					iterator(Node *p) : const_iterator(p);
+					iterator(Node *p) : const_iterator(p) {}
 
-					friend class List<Object>;
+					friend class List<T>; //!< Also make this class a ls:List's friend.
 
 			};
 
 /*--------------------------[I] Special Members------------------------------*/
 	
-		//! @brief
+		//! @brief List's normal constructor
 		List();
 		
-		//! @brief
+		//! @brief List's normal destructor
 		~List();
 
-		//! @brief
+		//! @brief List's operator '='
 		List & operator= (const List &);
 
 
