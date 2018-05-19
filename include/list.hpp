@@ -26,47 +26,49 @@ namespace ls{
 		public:
 			class const_iterator {
 				
-				//! @brief
-				const_iterator();
+				//! @brief const_iterator constructor.
+				const_iterator(){};
 
-				//! @brief
-				const Object & operator* () const; 
+				//! @brief Overloads the pointer operator '*'
+				//! @details Current node data.  
+				const T & operator* () const; 
 				
-				//! @brief
+				//! @brief Overloads the operator '++' (no parameter usage).
 				const_iterator & operator++ ();
 			
-				//! @brief
+				//! @brief Overloads the operator '++' (parameter usage).
 				const_iterator operador++ (int);
 
-				//! @brief
+				//! @brief Overloads the operator '--' (no parameter usage).
 				const_iterator & operator-- ();
 
-				//! @brief
+				//! @brief Overloads the operator '--' (parameter usage).
 				const_iterator operator-- (int);
 
-				//! @brief
+				//! @brief Overloads the operator '=='.
 				bool operator== (const const_iterator & rhs) const;
 
-				//! @brief
+				//! @brief Overloads the operator '!='.
 				bool operator!= (const const_iterator & rhs) const;
 			
 				protected:
-					Node *current; //!<
+					Node *m_node; //!<
 
 					//! @brief
 					const_iterator(Node *p) : current(p);
 
-					friend class List<Object>;
+					friend class List<T>; //!< Makes the class a 'List''s friend to use it's members.
+
 			};
 
 			class iterator : public const_iterator{
 
 				public:
-					//! @brief
+					//! @brief iterator's constructor.
 					iterator() : const_iterator(){}
 					
-					//! @brief
-					const Object & operator* () const;
+					//! @brief Overloads 
+					const T & operator* () const;
 			
 					//! @brief
 					Object & operator* ();
@@ -119,42 +121,42 @@ namespace ls{
 
 /*-------------------------[III] Storage Capacity----------------------------*/
 
-		//! @brief
+		//! @return The number of elements in the container. 
 		int size() const;
 
-		//! @brief
+		//! @brief True if the container contains no elements, and false otherwise.
 		bool empty() const;
 
 /*-----------------------------[IV] Modifiers--------------------------------*/
 
-		//! @brief
+		//! @brief Remove (either logically or physically) all elements from the container.
 		void clear();
 	
-		//! @brief
+		//! @return The element at the beginning of the list.
 		T & front();
 	
-		//! @brief
+		//! @returns The const element at the beginning of the list.
 		const T & front();
 	
-		//! @brief
+		//! @return The element at the end of the list
 		T & back();
 
-		//! @brief
-		cont T & back();
+		//! @return The object at the end of the list.
+		const T & back();
 
-		//! @brief
+		//! @brief Adds an 'value' to the front of the list.
 		void push_front(const T &value);
 
-		//! @brief
+		//! @brief Adds an 'value' to the end of the list.
 		void push_back(const T& value);
 
-		//! @brief
+		//! @brief Removes The element at the front of the list. 
 		void pop_front();
 
-		//! @brief
+		//! @brief Removes The element at the end of the list.
 		void pop_back();
 
-		//! @brief
+		//! @brief Replaces the content of the list with copies of value x.
 		void assign(const T& value);
 
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
