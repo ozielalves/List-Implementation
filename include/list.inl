@@ -7,7 +7,7 @@
  * @brief List class's inl
  */
 
-#include "list.hpp"
+#include "../include/list.hpp"
 
 template< typename T >
 List<T>::List(){
@@ -56,13 +56,13 @@ void List<T>::clear(){
 }
 
 template< typename T >
-const T &List<T>::front() const{
+const T& List<T>::front() const{
 
 	return m_head->next->data;
 }
 
 template< typename T >
-const T&List<T>::back() const{
+const T& List<T>::back() const{
 
 	return m_tail->prev->data;
 }
