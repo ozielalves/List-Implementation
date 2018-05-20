@@ -26,9 +26,9 @@ namespace ls{
 		private:
 			struct Node{
 
-				T data;		//!< Data field.
-				Node *next; //!< Pointer to the next node.
-				Node *prev; //!< Pointer to the previous node.
+				T data;	//!< Data field.
+				Node *next;	//!< Pointer to the next node.
+				Node *prev;	//!< Pointer to the previous node.
 				
 				//! @brief 
 				Node(const T & d = T(), Node *p = nullptr, Node *n = nullptr)
@@ -150,93 +150,93 @@ namespace ls{
 
 /*--------------------------[I] Special Members------------------------------*/
 	
-		//! @brief List's normal constructor
-		List();
+			//! @brief List's normal constructor
+			List();
 		
-		//! @brief List's normal destructor
-		~List();
+			//! @brief List's normal destructor
+			~List();
 
-		//! @brief List's operator '='
-		List & operator= (const List &);
+			//! @brief List's operator '='
+			List & operator= (const List &);
 
 
 /*-----------------------------[II] Iterators--------------------------------*/
 		
-		//! @brief
-		iterator begin();
+			//! @return The list's begin.
+			iterator begin();
 
-		//! @brief
-		const_iterator cbegin() const;
+			//! @brief The list's begin (const).
+			const_iterator cbegin() const;
 	
-		//! @brief
-		iterator end();
+			//! @brief The list's end.
+			iterator end();
 
-		//! @brief
-		const_iterator cend() const;
+			//! @brief The list's end (const).
+			const_iterator cend() const;
 
 /*-------------------------[III] Storage Capacity----------------------------*/
 
-		//! @return The number of elements in the container. 
-		int size() const;
+			//! @return The number of elements in the container. 
+			int size() const;
 
-		//! @brief True if the container contains no elements, and false otherwise.
-		bool empty() const;
+			//! @brief True if the container contains no elements, and false otherwise.
+			bool empty() const;
 
 /*-----------------------------[IV] Modifiers--------------------------------*/
 
-		//! @brief Remove (either logically or physically) all elements from the container.
-		void clear();
+			//! @brief Remove (either logically or physically) all elements from the container.
+			void clear();
 	
-		//! @return The element at the beginning of the list.
-		T & front();
+			//! @return The element at the beginning of the list.
+			T & front();
 	
-		//! @returns The const element at the beginning of the list.
-		const T & front();
+			//! @returns The const element at the beginning of the list.
+			const T & front();
 	
-		//! @return The element at the end of the list
-		T & back();
+			//! @return The element at the end of the list
+			T & back();
 
-		//! @return The element at the end of the list.
-		const T & back();
+			//! @return The element at the end of the list.
+			const T & back();
 
-		//! @brief Adds an 'value' to the front of the list.
-		void push_front(const T &value);
+			//! @brief Adds an 'value' to the front of the list.
+			void push_front(const T &value);
 
-		//! @brief Adds an 'value' to the end of the list.
-		void push_back(const T& value);
+			//! @brief Adds an 'value' to the end of the list.
+			void push_back(const T& value);
 
-		//! @brief Removes The element at the front of the list. 
-		void pop_front();
+			//! @brief Removes The element at the front of the list. 
+			void pop_front();
 
-		//! @brief Removes The element at the end of the list.
-		void pop_back();
+			//! @brief Removes The element at the end of the list.
+			void pop_back();
 
-		//! @brief Replaces the content of the list with copies of value x.
-		void assign(const T& value);
+			//! @brief Replaces the content of the list with copies of value x.
+			void assign(const T& value);
 
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
 
-		//! @brief
-		template< class InItr >
-		void assign(InItr first, InItr last);
+			//! @brief
+			template< class InItr >
+			void assign(InItr first, InItr last);
 		
-		//! @brief
-		void assign(std::initializer_list<T> ilist);
+			//! @brief Assigns an value from an initializer list to the list  
+			void assign(std::initializer_list<T> ilist);
 
-		//! @brief
-		iterator insert(const_iterator itr, const T& value);
+			//! @brief
+			iterator insert(const_iterator itr, const T& value);
 
-		//! @brief
-		iterator insert(const_iterator pos, std::initializer_list<T> ilist);
+			//! @brief
+			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
 
-		//! @brief
-		iterator erase(const_iterator itr);
+			//! @brief
+			iterator erase(const_iterator itr);
 
-		//! @brief
-		iterator erase(const_iterator first, const_iterator last);
+			//! @brief
+			iterator erase(const_iterator first, const_iterator last);
 
-		//! @brief
-		const_iterator find(const T& value) const;
+			//! @brief
+			const_iterator find(const T& value) const;
 
 	};
 }
