@@ -48,25 +48,45 @@ namespace ls{
 
 				//! @brief Overloads the pointer operator '*'
 				//! @details Current node data.  
-				const T & operator* () const; 
+				const T & operator* () const{
+					reuturn m_node->data;
+				} 
 				
 				//! @brief Overloads the operator '++' (no parameter usage).
-				const_iterator & operator++ ();
+				const_iterator & operator++ (){
+					m_node = m_node->next;
+					return(*this);
+				}
 			
 				//! @brief Overloads the operator '++' (parameter usage).
-				const_iterator operator++ (int);
+				const_iterator operator++ (int){
+					const_iterator cpy(m_node);
+					m_node = m_node->next;
+					return cpy;
+				}
 
 				//! @brief Overloads the operator '--' (no parameter usage).
-				const_iterator & operator-- ();
+				const_iterator & operator-- (){
+					m_node = m_node->prev;
+					return (*this);
+				}
 
 				//! @brief Overloads the operator '--' (parameter usage).
-				const_iterator operator-- (int);
+				const_iterator operator-- (int){
+					const_iterator cpy(m_node);
+					m_node = m_node->prev;
+					return cpy;
+				}
 
 				//! @brief Overloads the operator '=='.
-				bool operator== (const const_iterator & rhs) const;
+				bool operator== (const const_iterator & rhs) const{
+					return(m_node == rhs.m_node);
+				}
 
 				//! @brief Overloads the operator '!='.
-				bool operator!= (const const_iterator & rhs) const;
+				bool operator!= (const const_iterator & rhs) const{
+					return !(*this == rhs);
+				}
 			
 				protected:
 					Node *m_node; //!<
