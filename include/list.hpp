@@ -85,22 +85,40 @@ namespace ls{
 					iterator() : const_iterator(){}
 					
 					//! @brief Overloads the operator '*'. (const)
-					const T & operator* () const;
+					const T & operator* () const{
+						return const_iterator::m_node->data;
+					}
 			
 					//! @brief Overloads the operator '*'.
-					T &operator* ();
+					T &operator* (){
+						return const_iterator::m_node->data;
+					}
 					
 					//! @brief Overloads the operator '++' (no parameter usage).
-					iterator & operator++ ();
+					iterator & operator++ (){
+						const_iterator::m_node = const_iterator::m_node->next;
+						return (*this);
+					}
 
 					//! @brief Overloads the operator '++' (parameter usage).
-					iterator operator++ (int);
+					iterator operator++ (int){
+						iterator cpy(const_iterator::m_node);
+						const_iterator::m_node = const_iterator::m_node->next;
+						return cpy;
+					}
 
 					//! @brief Overloads the operator '--' (no parameter usage).
-					iterator & operator-- ();
+					iterator & operator-- (){
+						const_iterator::m_node = const_iterator::m_node->prev;
+						return(*this);
+					}
 
 					//! @brief Overloads the operator '--' (parameter usage).
-					iterator operator-- (int);
+					iterator operator-- (int){
+						const_iterator cpy(const_iterator::m_node);
+						const_iterator::m_node = const_iterator::m_node->prev;
+						return cpy;
+					}
 
 				protected:
 					//! @brief
@@ -158,7 +176,7 @@ namespace ls{
 		//! @return The element at the end of the list
 		T & back();
 
-		//! @return The object at the end of the list.
+		//! @return The element at the end of the list.
 		const T & back();
 
 		//! @brief Adds an 'value' to the front of the list.
@@ -202,3 +220,7 @@ namespace ls{
 
 	};
 }
+
+#include "list.inl"
+
+#endif
