@@ -8,7 +8,6 @@
  */
 
 #include "../include/list.hpp"
-
 template< typename T >
 List<T>::List(){
 
@@ -149,4 +148,3 @@ template< typename T >
 typename List<T>::const_iterator List<T>::cend() const{
 	return typename List<T>::const_iterator(m_tail);
 }
-
