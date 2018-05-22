@@ -55,13 +55,13 @@ namespace ls{
 					const T & operator* () const;
 							
 					//! @brief Overloads the operator '++' (no parameter usage).
-					const_iterator & operator++ ();
+					const_iterator & operator++ (void);
 						
 					//! @brief Overloads the operator '++' (parameter usage).
 					const_iterator operator++ (int);
 
 					//! @brief Overloads the operator '--' (no parameter usage).
-					const_iterator & operator-- ();
+					const_iterator & operator-- (void);
 
 					//! @brief Overloads the operator '--' (parameter usage).
 					const_iterator operator-- (int);
@@ -86,7 +86,7 @@ namespace ls{
 
 				public:
 					//! @brief iterator's constructor.
-					iterator() : const_iterator() { /*empty */ }
+					iterator() : const_iterator(){};
 								
 					//! @brief Overloads the operator '*'. (const)
 					const T & operator* () const;
@@ -95,13 +95,13 @@ namespace ls{
 					T &operator* ();
 
 					//! @brief Overloads the operator '++' (no parameter usage).
-					iterator & operator++ ();
+					iterator & operator++ (void);
 					
 					//! @brief Overloads the operator '++' (parameter usage).
 					iterator operator++ (int);
 
 					//! @brief Overloads the operator '--' (no parameter usage).
-					iterator & operator-- ();
+					iterator & operator-- (void);
 
 					//! @brief Overloads the operator '--' (parameter usage).
 					iterator operator-- (int);
@@ -121,10 +121,10 @@ namespace ls{
 			~List();
 
 			//! @brief List's operator '='
-			List & operator= (const List &);
+			//List & operator= (const List &);
 
 			//! @brief
-			List( const List &);
+			//List( const List &);
 
 
 /*-----------------------------[II] Iterators--------------------------------*/
@@ -144,7 +144,7 @@ namespace ls{
 /*-------------------------[III] Storage Capacity----------------------------*/
 
 			//! @return The number of elements in the container. 
-			int size() const;
+			size_t size() const;
 
 			//! @brief True if the container contains no elements, and false otherwise.
 			bool empty() const;
@@ -182,7 +182,7 @@ namespace ls{
 			void assign(const T& value);
 
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
-
+/*
 			//! @brief
 			template< class InItr >
 			void assign(InItr first, InItr last);
@@ -204,7 +204,7 @@ namespace ls{
 
 			//! @brief
 			const_iterator find(const T& value) const;
-
+*/
 	};
 	
 }

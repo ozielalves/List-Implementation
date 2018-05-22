@@ -11,6 +11,8 @@
 #include <cassert>
 #include "../include/list.hpp"
 
+using namespace ls;
+
 int main(int argc, char const *argv[]){
 
 /*-------------------------- Control variables ------------------------------*/
@@ -131,43 +133,6 @@ int main(int argc, char const *argv[]){
     
     assert(l.empty() == true && l2.empty() == true && l3.empty() == true);
 
-/*---------------- 11) assign() with initializer list -----------------------*/
-    
-	l.assign({1, 2, 3, 4});
-    l2.assign({1, 2, 3, 4});
-    l3.assign({1, 2, 3, 4});
-    for (i = 1; i < 5; i++) {
-        
-        assert(l.front() == i && l2.front() == i && l3.front() == i);
-        
-        l.pop_front();
-        l2.pop_front();
-        l3.pop_front();
-    }
-
-    assert(l.size() == 0 && l2.size() == 0 && l3.size() == 0);
-    
-    assert(l.empty() == true && l2.empty() == true && l3.empty() == true);
-    
-    l.clear();
-    l2.clear();
-
-    for (i = 0; i < 10; i++) {
-    
-        l.push_back(i);
-        l2.push_back(i);
-        l3.push_back(i);
-    }
-
-    l.clear();
-    l2.clear();
-
-    for (i = 0; i < 10; i++) {
-    
-        l.push_back(i);
-        l2.push_back(i);
-        l3.push_back(i);
-    }
 
     std::cout << ">>> Exiting with success...\n";
 
