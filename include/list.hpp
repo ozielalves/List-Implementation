@@ -65,7 +65,16 @@ namespace ls{
 
 					//! @brief Overloads the operator '--' (parameter usage).
 					const_iterator operator-- (int);
+
+					//! @brief Overloads the operator '+' (parameter usage).
+					const_iterator operator+ (int);
 				
+					//! @brief Overloads the operator '-' (parameter usage).
+					const_iterator operator- (int);
+
+					//! @brief Overloads the operator '-' (parameter usage).
+					size_t operator- (const const_iterator & rhs);	
+	
 					//! @brief Overloads the operator '=='.
 					bool operator== (const const_iterator & rhs) const;
 
@@ -103,8 +112,18 @@ namespace ls{
 					//! @brief Overloads the operator '--' (no parameter usage).
 					iterator & operator-- (void);
 
-					//! @brief Overloads the operator '--' (parameter usage).
+					//! @brief Overloads the operator '--' (no parameter usage).
 					iterator operator-- (int);
+
+					//! @brief Overloads the operator '+' (parameter usage).
+					iterator operator+ (int);
+
+					//! @brief Overloads the operator '-' (parameter usage).
+					iterator operator- (int);
+
+					//! @brief Overloads the operator '-' (parameter usage).
+					size_t operator- ( const iterator & rhs );
+
 
 				protected:
 					//! @brief
@@ -114,16 +133,16 @@ namespace ls{
 			};
 /*--------------------------[I] Special Members------------------------------*/
 	
-			//! @brief List's normal constructor
+			//! @brief List's normal constructor.
 			List();
 		
-			//! @brief List's normal destructor
+			//! @brief List's normal destructor.
 			~List();
 
-			//! @brief List's operator '='
+			//! @brief List's operator '='.
 			List & operator= (const List &);
 
-			//! @brief
+			//! @brief List's copy constructor.
 			List( const List &);
 
 
@@ -153,12 +172,18 @@ namespace ls{
 
 			//! @brief Remove (either logically or physically) all elements from the container.
 			void clear();
+
+			//! @return The element at the beginning of the list.
+			T& front();
 		
 			//! @returns The const element at the beginning of the list.
-			const T& front() const;
-	
+//			const T& front() const;
+
 			//! @return The element at the end of the list.
-			const T& back() const;
+			T& back();
+
+			//! @return The const element at the end of the list.
+//			const T& back() const;
 
 			//! @brief Adds an 'value' to the front of the list.
 			void push_front(const T &value);
@@ -181,22 +206,22 @@ namespace ls{
 //			template< class InItr >
 //			void assign(InItr first, InItr last);
 		
-			//! @brief Assigns an value from an initializer list to the list  
+			//! @brief Assigns an value from an initializer list to the list.
 			void assign(std::initializer_list<T> ilist);
 
-			//! @brief
+			//! @brief Inserts an value on the specified location.
 			iterator insert(const_iterator itr, const T& value);
 
 			//! @brief
 //			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
 
-			//! @brief
+			//! @brief Erase node existing on specified location.
 			iterator erase(const_iterator itr);
 
-			//! @brief
+			//! @brief Erase nodes existing between range.
 			iterator erase(const_iterator first, const_iterator last);
 
-			//! @brief
+			//! @brief Searchs for the key value on list.
 			const_iterator find(const T& value) const;
 
 	};
