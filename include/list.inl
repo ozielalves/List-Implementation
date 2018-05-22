@@ -233,13 +233,14 @@ namespace ls
 		first.m_node->prev->next = last.m_node;
 		last.m_node->prev = first.m_node->prev;
 		while( first != last ){
+			std::cout << *first << " ";
 			auto target = first.m_node;
 			m_size--;
 			first++;
 			delete target;
 		}
 
-		return last;
+		return List<T>::iterator(last.m_node);
 	}
 
 	template< typename T >
@@ -291,16 +292,6 @@ namespace ls
 	}
 
 	template< typename T >
-	bool List<T>::const_iterator::operator==(const const_iterator & rhs) const{
-		return m_node == rhs.m_node;
-	}
-
-	template< typename T >
-	bool List<T>::const_iterator::operator!=(const const_iterator& rhs) const{
-		return !(*this == rhs);
-	}
-
-	template< typename T >
 	typename List<T>::const_iterator List<T>::const_iterator::operator+(int x){
 		
 		return m_node + x;
@@ -317,11 +308,18 @@ namespace ls
 		return m_node - rhs.m_node;
 	}
 
+	template< typename T >
+	bool List<T>::const_iterator::operator==(const const_iterator & rhs) const{
+		return m_node == rhs.m_node;
+	}
+
+	template< typename T >
+	bool List<T>::const_iterator::operator!=(const const_iterator& rhs) const{
+		return !(*this == rhs);
+	}
+
 
 /*----------------------- Iterators Functions -------------------------*/
-	//template< typename T >
-	//List<T>::iterator::iterator(){ /*empty*/ }
-
 	template< typename T >
 	const T & List<T>::iterator::operator* ( ) const{
 		return const_iterator::m_node->data;

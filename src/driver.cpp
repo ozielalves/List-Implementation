@@ -209,15 +209,52 @@ int main(int argc, char const *argv[]){
 	std::cout << "\n";
 	
 	std::cout << "List cha:\n";
-	for(auto itr = cha.begin(); itr != cha.end(); itr++){
+	auto itrr = chu.begin();
+	for(auto itr = cha.begin(); itr != cha.end() and itrr != chu.end(); itrr++, itr++){
 		std::cout << *itr << " ";
+		assert( *itr == *itrr );
 	}
 	std::cout << "\n";
+
+/*------------ Testing erase and assign -------------*/
+
+	List<float> f1;
+	for(int i=1; i < 13; i+=2){
+		f1.push_back(i/2);
+	}
+	List<float> f2 = f1;
+	f2.assign(10.7);
+
+	// Everthing is 10.7
+	for(auto it(f2.begin()); it != f2.end(); it++){
+		std::cout << *it << " ";
+	}
+	std::cout << "\n";
+
+	auto f2_itr = f2.begin();
+	auto f2_itr_end = f2.end();
+
+	f2.erase(f2_itr, f2_itr_end);
+	std::cout << "\n>>> f2 after erase:\n";
+	for(auto it(f2.begin()); it != f2.end(); it++){
+		std::cout << *it << " ";
+	}
+	std::cout << "\n";
+
+	assert( f2.size() == 0 );
+
+	f1.assign({5.5,2.5,7.5,0.0,10.0});
+	assert( f1.size() == 5 and *(f1.begin()) == 5.5 );
+
+
+
+
 
 
 
 
 	std::cout << ">>> Exiting with success...\n";
+
 
     return EXIT_SUCCESS;
 

@@ -1,17 +1,5 @@
 #TODO Implementations
 
-## All
-- [x] *I* SPECIAL MEMBERS
-- [x] *II* ITERATORS
-- [x] *III* Capacity
-- [x] *IV* Modifiers
-- [ ] *IV-a* Modifiers with iterators.
-```bash
-Assign with Range
-Insert with initializer list
-```
-- [x] Class const_iterator
-- [x] Class iterator
 
 ## 1. Correct implementation of special members (Section 2.1)(16 credits);:
 
