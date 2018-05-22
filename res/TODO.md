@@ -13,10 +13,10 @@
 
 ##2. Correct implementation of the get iterators (Section 3.1) (4 credits);
 
-- [ ] (a) begin() (1 credits);
-- [ ] (b) end() (1 credits);
-- [ ] (c) cbegin() (1 credits);
-- [ ] (d) cend() (1 credits);
+- [x] (a) begin() (1 credits);
+- [x] (b) end() (1 credits);
+- [x] (c) cbegin() (1 credits);
+- [x] (d) cend() (1 credits);
 
 ##3. Correct implementation of common operations (Section 2.2) (20 credits);
 
@@ -33,8 +33,8 @@
 
 ##4. Correct implementation of operator overloading (Section 2.3) (2 credits);
 
-- [ ] (a) Operator==() (1 credits);
-- [ ] (b) Operator!=() (1 credits);
+- [x] (a) Operator==() (1 credits);
+- [x] (b) Operator!=() (1 credits);
 
 ##5. Correct implementation of methods that require iterator (Section 3.3) (21 credits);
 
@@ -48,8 +48,8 @@
 
 ### Const_Iterators
 
-- [ ] const_iterator( );
-- [ ] const T & operator * ( ) const;
+- [x] const_iterator( );
+- [x] const T & operator * ( ) const;
 - [x] const_iterator & operator ++ ( ); // ++it;
 - [x] const_iterator operator ++ ( i n t ); // it++;
 - [x] const_iterator & operator -- ( ); // --it;
@@ -59,8 +59,8 @@
 
 ### Iterators
 
-- [ ] iterator( ) : const_iterator() { /* Empty */ }
-- [ ] const T & operator * ( ) const;
+- [x] iterator( ) : const_iterator() { /* Empty */ }
+- [x] const T & operator * ( ) const;
 - [x] T & operator * ( );
 - [x] iterator & operator ++ ( );
 - [x] iterator operator ++ ( int );
