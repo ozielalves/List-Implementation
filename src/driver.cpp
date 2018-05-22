@@ -15,11 +15,11 @@ int main(int argc, char const *argv[]){
 
 /*-------------------------- Control variables ------------------------------*/
     
-	List<int> l;
-    List<int> l2(l);
-    List<int> l3(std::move(l));
-    List<int>::iterator it;
-    List<int>::const_iterator cit;
+	ls::List<int> l;
+	ls::List<int> l2(l);
+	ls::List<int> l3(std::move(l));
+	ls::List<int>::iterator it;
+	ls::List<int>::const_iterator cit;
     int i;
 
 /*------------------------End of control variables --------------------------*/ 

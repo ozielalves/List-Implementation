@@ -42,51 +42,53 @@ namespace ls{
 
 		public:
 			class /*List<T>::*/const_iterator {
-				
-				//! @brief const_iterator constructor.
-				const_iterator(){};
-
-				//! @brief Overloads the pointer operator '*'
-				//! @details Current node data.  
-				const T & operator* () const{
-					reuturn m_node->data;
-				} 
-				
-				//! @brief Overloads the operator '++' (no parameter usage).
-				const_iterator & operator++ (){
-					m_node = m_node->next;
-					return(*this);
-				}
 			
-				//! @brief Overloads the operator '++' (parameter usage).
-				const_iterator operator++ (int){
-					const_iterator cpy(m_node);
-					m_node = m_node->next;
-					return cpy;
-				}
+				public:
 
-				//! @brief Overloads the operator '--' (no parameter usage).
-				const_iterator & operator-- (){
-					m_node = m_node->prev;
-					return (*this);
-				}
+					//! @brief const_iterator constructor.
+					const_iterator(){};
 
-				//! @brief Overloads the operator '--' (parameter usage).
-				const_iterator operator-- (int){
-					const_iterator cpy(m_node);
-					m_node = m_node->prev;
-					return cpy;
-				}
+					//! @brief Overloads the pointer operator '*'
+					//! @details Current node data.  
+					const T & operator* () const{
+						return m_node->data;
+					} 
+					
+					//! @brief Overloads the operator '++' (no parameter usage).
+					const_iterator & operator++ (){
+						m_node = m_node->next;
+						return(*this);
+					}
+			
+					//! @brief Overloads the operator '++' (parameter usage).
+					const_iterator operator++ (int){
+						const_iterator cpy(m_node);
+						m_node = m_node->next;
+						return cpy;
+					}
 
-				//! @brief Overloads the operator '=='.
-				bool operator== (const const_iterator & rhs) const{
-					return(m_node == rhs.m_node);
-				}
+					//! @brief Overloads the operator '--' (no parameter usage).
+					const_iterator & operator-- (){
+						m_node = m_node->prev;
+						return (*this);
+					}
 
-				//! @brief Overloads the operator '!='.
-				bool operator!= (const const_iterator & rhs) const{
-					return !(*this == rhs);
-				}
+					//! @brief Overloads the operator '--' (parameter usage).
+					const_iterator operator-- (int){
+						const_iterator cpy(m_node);
+						m_node = m_node->prev;
+						return cpy;
+					}
+
+					//! @brief Overloads the operator '=='.
+					bool operator== (const const_iterator & rhs) const{
+						return(m_node == rhs.m_node);
+					}
+
+					//! @brief Overloads the operator '!='.
+					bool operator!= (const const_iterator & rhs) const{
+						return !(*this == rhs);
+					}
 			
 				protected:
 					Node *m_node; //!<
@@ -177,7 +179,7 @@ namespace ls{
 /*-------------------------[III] Storage Capacity----------------------------*/
 
 			//! @return The number of elements in the container. 
-			int size() const;
+			size_t size() const;
 
 			//! @brief True if the container contains no elements, and false otherwise.
 			bool empty() const;
@@ -188,16 +190,16 @@ namespace ls{
 			void clear();
 	
 			//! @return The element at the beginning of the list.
-			T & front();
+			T& front();
 	
 			//! @returns The const element at the beginning of the list.
-			const T & front();
+			const T& front() const;
 	
 			//! @return The element at the end of the list
-			T & back();
+			T& back();
 
 			//! @return The element at the end of the list.
-			const T & back();
+			const T& back() const;
 
 			//! @brief Adds an 'value' to the front of the list.
 			void push_front(const T &value);

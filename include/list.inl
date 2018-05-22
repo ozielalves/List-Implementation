@@ -8,6 +8,7 @@
  */
 
 #include "list.hpp"
+namespace ls {
 
 template< typename T >
 List<T>::List(){
@@ -46,7 +47,7 @@ void List<T>::clear(){
 	while(copy1 != m_tail){
 
 		Node *copy2 = copy1;
-		copy1 = copy->next;
+		copy1 = copy1->next;
 		delete copy2;
 	}
 
@@ -56,13 +57,13 @@ void List<T>::clear(){
 }
 
 template< typename T >
-const T &List<T>::front() const{
+const T& List<T>::front() const{
 
 	return m_head->next->data;
 }
 
 template< typename T >
-const T&List<T>::back() const{
+const T& List<T>::back() const{
 
 	return m_tail->prev->data;
 }
@@ -73,7 +74,7 @@ void List<T>::push_front(const T & x){
 	Node *nn = new Node(x, m_head->next, m_head); //!<
 	m_head->next->prev = nn;
 	m_head->next = nn;
-	m_size++
+	m_size++;
 	//delete nn;
 }
 
@@ -84,7 +85,7 @@ void List<T>::pop_front(){
 		
 		Node *pp = m_head->next;
 		pp->next->prev = m_head; //! putting the head value on the poped element place.
-		m_head->next = pp->next  //! and then follows like above to the others.
+		m_head->next = pp->next;  //! and then follows like above to the others.
 		m_size--;
 		delete pp;
 	}
@@ -93,7 +94,7 @@ void List<T>::pop_front(){
 template< typename T >
 void List<T>::push_back(const T &x){ //! Inserts a prev Node.
 
-	Node nn = new Node(x, m_tail, m_Tail->prev);
+	Node *nn = new Node(x, m_tail, m_tail->prev);
 	m_tail->prev->next = nn;
 	m_tail->prev = nn;
 	m_size++;
@@ -123,7 +124,7 @@ void List<T>::assign(const T &value){
 }
 
 template< typename T >
-void List<T>assign(std::initializer_list<T> ilist){
+void List<T>::assign(std::initializer_list<T> ilist){
 	clear();
 	for(auto i = ilist.begin(); i != ilist.end(); i++){
 		push_back(*i);
@@ -150,3 +151,4 @@ typename List<T>::const_iterator List<T>::cend() const{
 	return typename List<T>::const_iterator(m_tail);
 }
 
+}
