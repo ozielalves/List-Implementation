@@ -38,9 +38,9 @@
 
 ##5. Correct implementation of methods that require iterator (Section 3.3) (21 credits);
 
-- [ ] (a) Insert() ×3 (9 credits);
+- [ ] (a) Insert() ×2 (9 credits);
 - [ ] (b) Find() ×2 (6 credits);
-- [ ] (c) Erase() ×2 (6 credits);
+- [x] (c) Erase() ×2 (6 credits);
 
 
 

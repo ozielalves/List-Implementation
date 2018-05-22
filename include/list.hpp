@@ -155,13 +155,13 @@ namespace ls{
 			void clear();
 	
 			//! @return The element at the beginning of the list.
-			T& front();
+//			T& front();
 	
 			//! @returns The const element at the beginning of the list.
 			const T& front() const;
 	
 			//! @return The element at the end of the list
-			T& back();
+//			T& back();
 
 			//! @return The element at the end of the list.
 			const T& back() const;

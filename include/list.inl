@@ -30,7 +30,7 @@ namespace ls
 	template< typename T >
 	List<T>::~List(){
 
-		clear();
+		clear( );
 		delete m_head;
 		delete m_tail;
 	}
@@ -94,7 +94,9 @@ namespace ls
 			if( temp->prev != m_head ){
 				delete temp->prev;
 			}
+
 			temp = temp->next;
+		
 		}
 
 		m_size = 0; 
@@ -182,28 +184,54 @@ namespace ls
 	// 	/*to complete*/
 	// }
 
-	// typename List<T>::iterator List<T>::insert( const_iterator itr,
-	// 														const T & value ){
-	// 	/*to complete*/
-	// }
+	template< typename T >
+	typename List<T>::iterator List<T>::insert( const_iterator itr,
+ 												const T & value ){
+		Node *no = new Node(value, itr.m_node->prev, itr.m_node);
+		itr.m_node->prev->next = no;
+		itr.m_node->prev = no;
 
-	// typename List<T>::iterator List<T>::insert( const_iterator pos,
-	// 														std::initializer_list<T> ilist ){
-	// 	/*to complete*/
-	// }
+		std::cout << "aq: " << *itr << "\n";
+		m_size++;
+		return itr;
+	}
+/*
+	template< typename T >
+	typename List<T>::iterator List<T>::insert( const_iterator pos,
+												std::initializer_list<T> ilist ){
+	
+	}
+*/
+	template< typename T >
+	typename List<T>:iterator List<T>::erase( const_iterator itr ){
+		auto target = itr.m_node;
+		itr.m_node->prev->next = itr.m_node->next;
+		itr.m_node->next->prev = itr.m_node->prev;
+		delete target;
 
-	// typename List<T>:iterator List<T>::erase( const_iterator itr ){
-	// 	/*to complete*/
-	// }
+		m_size--;
+		return itr;
+	}
 
-	// typename List<T>:iterator List<T>::erase( const_iterator first,
-	// 													const_iterator last ){
-	// 	/*to complete*/
-	// }
+	template< typename T >
+	typename List<T>:iterator List<T>::erase( const_iterator first,
+												const_iterator last ){
+		first.m_node->prev->next = last.m_node;
+		last.m_node->prev = first.m_node->prev;
+		while( first != last ){
+			auto target = first.m_node;
+			m_size--;
+			delete target;
+		}
 
-	// typename List<T>::const_iterator List<T>::find( const T & value ) const{
-	// 	/*to complete*/
-	// }
+		return last;
+	}
+
+	template< typename T >
+	typename List<T>::const_iterator List<T>::find( const T & value ) const{
+		Node *temp = m_head;
+		while( temp->next )
+	}
 
 /*-------------------- Const_Iterators Functions ----------------------*/
 	template< typename T >
