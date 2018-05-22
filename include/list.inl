@@ -34,9 +34,9 @@ namespace ls
 		delete m_head;
 		delete m_tail;
 	}
-/*
+
 	template< typename T >
-	typename List<T> & List<T>::operator= ( const List & rhs ){
+	List<T>& List<T>::operator= ( const List & rhs ){
 		m_head = rhs.m_head;
 		m_size = rhs.m_size;
 		m_tail = rhs.m_tail;
@@ -50,7 +50,7 @@ namespace ls
 		m_size = rhs.m_size;
 		m_tail = rhs.m_tail;
 	}
-*/
+
 /*-----------------------------[II] Iterators--------------------------------*/
 	template< typename T >
 	typename List<T>::iterator List<T>::begin(){
@@ -94,9 +94,11 @@ namespace ls
 			if( temp->prev != m_head ){
 				delete temp->prev;
 			}
-
+			if( temp->next == m_tail ){
+				delete temp;
+				break;
+			}
 			temp = temp->next;
-		
 		}
 
 		m_size = 0; 
@@ -172,13 +174,15 @@ namespace ls
 	}
 
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
-//	template< typename T >
-//	void List<T>::assign(std::initializer_list<T> ilist){
-//		clear();
-//		for(auto i = ilist.begin(); i != ilist.end(); i++){
-//			push_back(*i);
-//		}
-//	}
+	template< typename T >
+	void List<T>::assign(std::initializer_list<T> ilist){
+		clear( );
+		for(auto i = ilist.begin(); i != ilist.end(); i++){
+			push_back(*i);
+			std::cout << *i << " ";
+		}
+		std::cout << "\n";
+	}
 
 	// void List<T>::assign( InItr first, InItr last ){
 	// 	/*to complete*/
@@ -203,7 +207,7 @@ namespace ls
 	}
 */
 	template< typename T >
-	typename List<T>:iterator List<T>::erase( const_iterator itr ){
+	typename List<T>::iterator List<T>::erase( const_iterator itr ){
 		auto target = itr.m_node;
 		itr.m_node->prev->next = itr.m_node->next;
 		itr.m_node->next->prev = itr.m_node->prev;
@@ -214,13 +218,14 @@ namespace ls
 	}
 
 	template< typename T >
-	typename List<T>:iterator List<T>::erase( const_iterator first,
+	typename List<T>::iterator List<T>::erase( const_iterator first,
 												const_iterator last ){
 		first.m_node->prev->next = last.m_node;
 		last.m_node->prev = first.m_node->prev;
 		while( first != last ){
 			auto target = first.m_node;
 			m_size--;
+			first++;
 			delete target;
 		}
 
@@ -229,8 +234,15 @@ namespace ls
 
 	template< typename T >
 	typename List<T>::const_iterator List<T>::find( const T & value ) const{
-		Node *temp = m_head;
-		while( temp->next )
+		Node *temp = m_head->next;
+		while( temp != m_tail ){
+			if( temp.data == value ){
+				return List<T>::const_iterator(temp->next);
+			}
+			temp = temp->next;
+		}
+
+		return cend();
 	}
 
 /*-------------------- Const_Iterators Functions ----------------------*/

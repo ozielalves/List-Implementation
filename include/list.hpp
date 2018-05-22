@@ -121,10 +121,10 @@ namespace ls{
 			~List();
 
 			//! @brief List's operator '='
-			//List & operator= (const List &);
+			List & operator= (const List &);
 
 			//! @brief
-			//List( const List &);
+			List( const List &);
 
 
 /*-----------------------------[II] Iterators--------------------------------*/
@@ -153,16 +153,10 @@ namespace ls{
 
 			//! @brief Remove (either logically or physically) all elements from the container.
 			void clear();
-	
-			//! @return The element at the beginning of the list.
-//			T& front();
-	
+		
 			//! @returns The const element at the beginning of the list.
 			const T& front() const;
 	
-			//! @return The element at the end of the list
-//			T& back();
-
 			//! @return The element at the end of the list.
 			const T& back() const;
 
@@ -182,10 +176,10 @@ namespace ls{
 			void assign(const T& value);
 
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
-/*
+
 			//! @brief
-			template< class InItr >
-			void assign(InItr first, InItr last);
+//			template< class InItr >
+//			void assign(InItr first, InItr last);
 		
 			//! @brief Assigns an value from an initializer list to the list  
 			void assign(std::initializer_list<T> ilist);
@@ -194,7 +188,7 @@ namespace ls{
 			iterator insert(const_iterator itr, const T& value);
 
 			//! @brief
-			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
+//			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
 
 			//! @brief
 			iterator erase(const_iterator itr);
@@ -204,7 +198,7 @@ namespace ls{
 
 			//! @brief
 			const_iterator find(const T& value) const;
-*/
+
 	};
 	
 }
