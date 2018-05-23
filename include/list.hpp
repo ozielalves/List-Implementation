@@ -28,12 +28,12 @@ namespace ls{
 			struct Node{
 
 				T data;	//!< Data field.
-				Node *next;	//!< Pointer to the next node.
 				Node *prev;	//!< Pointer to the previous node.
+				Node *next;	//!< Pointer to the next node.
 				
 				//! @brief 
 				Node(const T & d = T(), Node *p = nullptr, Node *n = nullptr)
-					: data(d), next(n), prev(p) {}
+					: data(d), prev(p), next(n) {/*empty*/}
 			};
 
 			Node *m_head; 	//!< Pointer to the list's head.
@@ -44,21 +44,100 @@ namespace ls{
 		public:
 
 /*------------------------------Auxiliar Classes-----------------------------*/
+			class const_iterator{
 
-			class const_iterator;
+				public:
+					//! @brief const_iterator constructor.
+					const_iterator();
+
+					//! @brief Overloads the pointer operator '*'
+					//! @details Current node data.  
+					const T & operator* () const;
+							
+					//! @brief Overloads the operator '++' (no parameter usage).
+					const_iterator & operator++ (void);
+						
+					//! @brief Overloads the operator '++' (parameter usage).
+					const_iterator operator++ (int);
+
+					//! @brief Overloads the operator '--' (no parameter usage).
+					const_iterator & operator-- (void);
+
+					//! @brief Overloads the operator '--' (parameter usage).
+					const_iterator operator-- (int);
+
+					//! @brief Overloads the operator '+' (parameter usage).
+					const_iterator operator+ (int);
+				
+					//! @brief Overloads the operator '-' (parameter usage).
+					const_iterator operator- (int);
+
+					//! @brief Overloads the operator '=='.
+					bool operator== (const const_iterator & rhs) const;
+
+					//! @brief Overloads the operator '!='.
+					bool operator!= (const const_iterator & rhs) const;
+					
+				protected:
+
+					Node *m_node; //!< Current node when using iterators.
+
+					//! @brief Current node's constructor for const_iterators.
+					const_iterator(Node *p) : m_node(p) {}
+
+					friend class List<T>; //!< Makes the class a 'List''s friend to use it's members.
+			};
 			
-			class iterator;
+			class iterator : public const_iterator{
 
+				public:
+					//! @brief iterator's constructor.
+					iterator() : const_iterator(){};
+								
+					//! @brief Overloads the operator '*'. (const)
+					const T & operator* () const;
+						
+					//! @brief Overloads the operator '*'.
+					T &operator* ();
+
+					//! @brief Overloads the operator '++' (no parameter usage).
+					iterator & operator++ (void);
+					
+					//! @brief Overloads the operator '++' (parameter usage).
+					iterator operator++ (int);
+
+					//! @brief Overloads the operator '--' (no parameter usage).
+					iterator & operator-- (void);
+
+					//! @brief Overloads the operator '--' (no parameter usage).
+					iterator operator-- (int);
+
+					//! @brief Overloads the operator '+' (parameter usage).
+					iterator operator+ (int);
+
+					//! @brief Overloads the operator '-' (parameter usage).
+					iterator operator- (int);
+
+				protected:
+
+					//! @brief Current node's constructor for iterator.
+					iterator(Node *p) : const_iterator(p) {}
+
+					friend class List<T>; //!< Also make this class a ls:List's friend.
+			};
 /*--------------------------[I] Special Members------------------------------*/
 	
-			//! @brief List's normal constructor
+			//! @brief List's normal constructor.
 			List();
 		
-			//! @brief List's normal destructor
+			//! @brief List's normal destructor.
 			~List();
 
-			//! @brief List's operator '='
+			//! @brief List's operator '='.
 			List & operator= (const List &);
+
+			//! @brief List's copy constructor.
+			List( const List &);
 
 
 /*-----------------------------[II] Iterators--------------------------------*/
@@ -78,7 +157,7 @@ namespace ls{
 /*-------------------------[III] Storage Capacity----------------------------*/
 
 			//! @return The number of elements in the container. 
-			int size() const;
+			size_t size() const;
 
 			//! @brief True if the container contains no elements, and false otherwise.
 			bool empty() const;
@@ -87,18 +166,18 @@ namespace ls{
 
 			//! @brief Remove (either logically or physically) all elements from the container.
 			void clear();
-	
+
 			//! @return The element at the beginning of the list.
 			T& front();
-	
+		
 			//! @returns The const element at the beginning of the list.
-			const T& front() const;
-	
-			//! @return The element at the end of the list
-			T& back();
+//			const T& front() const;
 
 			//! @return The element at the end of the list.
-			const T& back() const;
+			T& back();
+
+			//! @return The const element at the end of the list.
+//			const T& back() const;
 
 			//! @brief Adds an 'value' to the front of the list.
 			void push_front(const T &value);
@@ -121,136 +200,26 @@ namespace ls{
 			template< class InItr >
 			void assign(InItr first, InItr last);
 		
-			//! @brief Assigns an value from an initializer list to the list  
+			//! @brief Assigns an value from an initializer list to the list.
 			void assign(std::initializer_list<T> ilist);
 
-			//! @brief
+			//! @brief Inserts an value on the specified location.
 			iterator insert(const_iterator itr, const T& value);
 
-			//! @brief
+			//! @brief Inserts an entire initializer list starting on pos.
 			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
 
-			//! @brief
+			//! @brief Erase node existing on specified location.
 			iterator erase(const_iterator itr);
 
-			//! @brief
+			//! @brief Erase nodes existing between range.
 			iterator erase(const_iterator first, const_iterator last);
 
-			//! @brief
+			//! @brief Searchs for the key value on list.
 			const_iterator find(const T& value) const;
 
 	};
-
-/*--------------------------[V] Auxiliar Classes-----------------------------*/
 	
-	template <typename T>
-	class List<T>::const_iterator {
-				
-		//! @brief const_iterator constructor.
-		const_iterator(){};
-
-		//! @brief Overloads the pointer operator '*'
-		//! @details Current node data.  
-		const T & operator* () const{
-			return m_node->data;
-		} 
-				
-		//! @brief Overloads the operator '++' (no parameter usage).
-		const_iterator & operator++ (){
-			m_node = m_node->next;
-			return(*this);
-		}
-			
-		//! @brief Overloads the operator '++' (parameter usage).
-		const_iterator operator++ (int){
-			const_iterator cpy(m_node);
-			m_node = m_node->next;
-			return cpy;
-		}
-
-		//! @brief Overloads the operator '--' (no parameter usage).
-		const_iterator & operator-- (){
-			m_node = m_node->prev;
-			return (*this);
-		}
-
-		//! @brief Overloads the operator '--' (parameter usage).
-		const_iterator operator-- (int){
-			const_iterator cpy(m_node);
-			m_node = m_node->prev;
-			return cpy;
-		}
-	
-		//! @brief Overloads the operator '=='.
-		bool operator== (const const_iterator & rhs) const{
-			return(m_node == rhs.m_node);
-		}
-
-		//! @brief Overloads the operator '!='.
-		bool operator!= (const const_iterator & rhs) const{
-			return !(*this == rhs);
-		}
-			
-	protected:
-		Node *m_node; //!<
-
-		//! @brief
-		const_iterator(Node *p) : m_node(p) {}
-
-		friend class List<T>; //!< Makes the class a 'List''s friend to use it's members.
-
-	};
-
-	template <typename T>
-	class List<T>::iterator : public List<T>::const_iterator{
-
-	public:
-		//! @brief iterator's constructor.
-		iterator() : const_iterator(){}
-					
-		//! @brief Overloads the operator '*'. (const)
-		const T & operator* () const{
-			return const_iterator::m_node->data;
-		}
-			
-		//! @brief Overloads the operator '*'.
-		T &operator* (){
-			return const_iterator::m_node->data;
-		}
-					
-		//! @brief Overloads the operator '++' (no parameter usage).
-		iterator & operator++ (){
-			const_iterator::m_node = const_iterator::m_node->next;
-			return (*this);
-		}
-		
-		//! @brief Overloads the operator '++' (parameter usage).
-		iterator operator++ (int){
-			iterator cpy(const_iterator::m_node);
-			const_iterator::m_node = const_iterator::m_node->next;
-			return cpy;
-		}
-
-		//! @brief Overloads the operator '--' (no parameter usage).
-		iterator & operator-- (){
-			const_iterator::m_node = const_iterator::m_node->prev;
-			return(*this);
-		}
-
-		//! @brief Overloads the operator '--' (parameter usage).
-		iterator operator-- (int){
-			const_iterator cpy(const_iterator::m_node);
-			const_iterator::m_node = const_iterator::m_node->prev;
-			return cpy;
-		}
-
-	protected:
-		//! @brief
-		iterator(Node *p) : const_iterator(p) {}
-
-		friend class List<T>; //!< Also make this class a ls:List's friend.
-
-	};
 }
 
 #include "list.inl"
