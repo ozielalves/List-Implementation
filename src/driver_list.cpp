@@ -1,5 +1,5 @@
 /**
- * @file driver.cpp
+ * @file driver_list.cpp
  * @version 1.0
  * @date May, 20.
  * @author Daniel Guerra and Oziel Alves
@@ -13,8 +13,9 @@
 
 using namespace ls;
 
-int main(int argc, char const *argv[]){
+int main( void ){
 
+	std::cout << "\n\e[36;4m>>> Driver Initialize\e[0m\n";
 /*-------------------------- Control variables ------------------------------*/
 
 	List<int> l;
@@ -183,7 +184,7 @@ int main(int argc, char const *argv[]){
 	assert(l.size() == 0 && l2.size() == 0 && l3.size() == 0);    
     assert(l.empty() == true && l2.empty() == true && l3.empty() == true);
    
-/*---------------------- Testing Constrcutors -------------------------------*/
+/*----------------- 12) Testing Some Constrcutors ----------------------*/
 
 	List<char> cha;
 	cha.push_back('a');
@@ -202,6 +203,9 @@ int main(int argc, char const *argv[]){
 	}
 	std::cout << "\n";
 	
+	assert( cha.size() == 5 );
+	assert( cha.size() == chi.size() and chi.size() == chu.size() );
+	
 	std::cout << "List chu:\n";
 	for(auto itr = chu.begin(); itr != chu.end(); itr++){
 		std::cout << *itr << " ";
@@ -216,7 +220,7 @@ int main(int argc, char const *argv[]){
 	}
 	std::cout << "\n";
 
-/*------------ Testing erase and assign -------------*/
+/*---------------- 13) Testing erase() and assign() -----------------*/
 
 	List<float> f1;
 	for(int i=1; i < 13; i+=2){
@@ -231,8 +235,9 @@ int main(int argc, char const *argv[]){
 	}
 	std::cout << "\n";
 
-	auto f2_itr = f2.begin();
+	auto f2_itr = f2.begin()+1;
 	auto f2_itr_end = f2.end();
+	f2_itr = f2_itr + 2;
 
 	f2.erase(f2_itr, f2_itr_end);
 	std::cout << "\n>>> f2 after erase:\n";
@@ -241,21 +246,49 @@ int main(int argc, char const *argv[]){
 	}
 	std::cout << "\n";
 
-	assert( f2.size() == 0 );
+	assert( f2.size() == 3 );
 
 	f1.assign({5.5,2.5,7.5,0.0,10.0});
+
 	assert( f1.size() == 5 and *(f1.begin()) == 5.5 );
+	f1.erase( f1.begin()+2 );
+	f1.erase( f1.end()-2 );
+
+	assert( f1.size() == 3 and *(f1.begin()+2) == 10.0);
+
+
+/*----------- 14) Testing insert() and assign() with range -------------*/
+
+	l.clear();
+	l2.clear();
+	l3.clear();
+
+	List<int> Listao;
+	for(i=1; i < 11; i++){
+		l.push_back(i*10);
+	}
+
+	assert( *(l.end()-1) == 100 );
+
+	Listao.assign(l.begin()+2, l.end()-1);
+
+	Listao.insert(Listao.begin(), {-10, -20, -30, -40});
+	assert( Listao.size() == 11 and Listao.front() == -10 );
+
+	std::cout << "\n>>> l1 after insert:\n";
+	for(auto k(Listao.begin()); k != Listao.end(); k++){
+		std::cout << *k << " ";
+	}
+	std::cout << "\n";
+	
+	l2.insert( l2.begin(), 8008 );
+	assert( l2.size() == 1 );
+	std::cout << "\n";
 
 
 
 
-
-
-
-
-	std::cout << ">>> Exiting with success...\n";
-
+	std::cout << "\n\e[36;4m>>> Exiting with success...\e[0m\n";
 
     return EXIT_SUCCESS;
-
 }

@@ -36,7 +36,7 @@ namespace ls
 	}
 
 	template< typename T >
-	List<T>& List<T>::operator= ( const List & rhs ){
+	List<T> & List<T>::operator= ( const List & rhs ){
 		m_head = rhs.m_head;
 		m_size = rhs.m_size;
 		m_tail = rhs.m_tail;
@@ -194,9 +194,18 @@ namespace ls
 				
 	}
 
-	// void List<T>::assign( InItr first, InItr last ){
-	// 	/*to complete*/
-	// }
+	template< typename T >
+	template< class InItr >
+	void List<T>::assign( InItr first, InItr last ){
+		clear( );
+
+		while( first != last ){
+			push_back(*first);
+			first++;
+			m_size++;
+		}
+		m_size = m_size/2;
+	}
 
 	template< typename T >
 	typename List<T>::iterator List<T>::insert( const_iterator itr,
@@ -204,18 +213,25 @@ namespace ls
 		Node *no = new Node(value, itr.m_node->prev, itr.m_node);
 		itr.m_node->prev->next = no;
 		itr.m_node->prev = no;
-
-		std::cout << "aq: " << *itr << "\n";
 		m_size++;
-		return itr;
+
+		return List<T>::iterator(itr.m_node);
 	}
-/*
+
 	template< typename T >
 	typename List<T>::iterator List<T>::insert( const_iterator pos,
 												std::initializer_list<T> ilist ){
-	
+		for(auto oziel = ilist.begin(); oziel != ilist.end(); oziel++){
+			Node *no = new Node(*oziel, pos.m_node->prev, pos.m_node);
+			pos.m_node->prev->next = no;
+			pos.m_node->prev = no;
+			
+			m_size++;
+		}
+		
+		return List<T>::iterator(pos.m_node);
 	}
-*/
+
 	template< typename T >
 	typename List<T>::iterator List<T>::erase( const_iterator itr ){
 		auto target = itr.m_node;
@@ -224,7 +240,7 @@ namespace ls
 		delete target;
 
 		m_size--;
-		return itr;
+		return List<T>::iterator(itr.m_node);
 	}
 
 	template< typename T >
@@ -233,7 +249,6 @@ namespace ls
 		first.m_node->prev->next = last.m_node;
 		last.m_node->prev = first.m_node->prev;
 		while( first != last ){
-			std::cout << *first << " ";
 			auto target = first.m_node;
 			m_size--;
 			first++;
@@ -292,20 +307,21 @@ namespace ls
 	}
 
 	template< typename T >
-	typename List<T>::const_iterator List<T>::const_iterator::operator+(int x){
-		
-		return m_node + x;
+	typename List<T>::const_iterator List<T>::const_iterator::operator+ (int x){
+		for(int i=0; i < x; i++){
+			m_node = m_node->next;
+		}
+	
+		return m_node;
 	}
 
 	template< typename T >
-	typename List<T>::const_iterator List<T>::const_iterator::operator-(int x){
-		
-		return m_node - x;
-	}
+	typename List<T>::const_iterator List<T>::const_iterator::operator- (int x){
+		for(int i =0; i < x; i++){
+			m_node = m_node->prev;
+		}
 
-	template< typename T >
-	size_t List<T>::const_iterator::operator-( const const_iterator & rhs ){
-		return m_node - rhs.m_node;
+		return m_node;
 	}
 
 	template< typename T >
@@ -330,12 +346,14 @@ namespace ls
 		return const_iterator::m_node->data;
 	}
 
+	// ++it
 	template< typename T >
 	typename List<T>::iterator & List<T>::iterator::operator++ (void){
 		const_iterator::m_node = const_iterator::m_node->next;
 		return *this;
 	}
 
+	// it++
 	template< typename T >
 	typename List<T>::iterator List<T>::iterator::operator++ (int){
 		iterator cpy(const_iterator::m_node);
@@ -343,12 +361,14 @@ namespace ls
 		return cpy;
 	}
 
+	// --it
 	template< typename T >
 	typename List<T>::iterator & List<T>::iterator::operator-- (void){
 		const_iterator::m_node = const_iterator::m_node->prev;
 		return *this;
 	}
 
+	// it--
 	template< typename T >
 	typename List<T>::iterator List<T>::iterator::operator-- (int){
 		iterator cpy(const_iterator::m_node);
@@ -357,20 +377,22 @@ namespace ls
 	}
 
 	template< typename T >
-	typename List<T>::iterator List<T>::iterator::operator+(int x){
+	typename List<T>::iterator List<T>::iterator::operator+ (int x){
 		
-		return const_iterator::m_node + x;
+		for(int i=0; i < x; i++){
+			const_iterator::m_node = const_iterator::m_node->next;
+		}		
+		return const_iterator::m_node;
 	}
 
 	template< typename T >
 	typename List<T>::iterator List<T>::iterator::operator-(int x){
 		
-		return const_iterator::m_node - x;
-	}
+		for(int i=0; i < x; i++){
+			const_iterator::m_node = const_iterator::m_node->prev;
+		}
 
-	template< typename T >
-	size_t List<T>::iterator::operator-( const iterator & rhs ){
-		return const_iterator::m_node - rhs.const_iterator::m_node;
+		return const_iterator::m_node;
 	}
 
 }

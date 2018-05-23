@@ -28,8 +28,8 @@ namespace ls{
 			struct Node{
 
 				T data;	//!< Data field.
-				Node *prev;	//!< Pointer to the next node.
-				Node *next;	//!< Pointer to the previous node.
+				Node *prev;	//!< Pointer to the previous node.
+				Node *next;	//!< Pointer to the next node.
 				
 				//! @brief 
 				Node(const T & d = T(), Node *p = nullptr, Node *n = nullptr)
@@ -72,9 +72,6 @@ namespace ls{
 					//! @brief Overloads the operator '-' (parameter usage).
 					const_iterator operator- (int);
 
-					//! @brief Overloads the operator '-' (parameter usage).
-					size_t operator- (const const_iterator & rhs);	
-	
 					//! @brief Overloads the operator '=='.
 					bool operator== (const const_iterator & rhs) const;
 
@@ -83,9 +80,9 @@ namespace ls{
 					
 				protected:
 
-					Node *m_node; //!<
+					Node *m_node; //!< Current node when using iterators.
 
-					//! @brief
+					//! @brief Current node's constructor for const_iterators.
 					const_iterator(Node *p) : m_node(p) {}
 
 					friend class List<T>; //!< Makes the class a 'List''s friend to use it's members.
@@ -121,12 +118,9 @@ namespace ls{
 					//! @brief Overloads the operator '-' (parameter usage).
 					iterator operator- (int);
 
-					//! @brief Overloads the operator '-' (parameter usage).
-					size_t operator- ( const iterator & rhs );
-
-
 				protected:
-					//! @brief
+
+					//! @brief Current node's constructor for iterator.
 					iterator(Node *p) : const_iterator(p) {}
 
 					friend class List<T>; //!< Also make this class a ls:List's friend.
@@ -203,8 +197,8 @@ namespace ls{
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
 
 			//! @brief
-//			template< class InItr >
-//			void assign(InItr first, InItr last);
+			template< class InItr >
+			void assign(InItr first, InItr last);
 		
 			//! @brief Assigns an value from an initializer list to the list.
 			void assign(std::initializer_list<T> ilist);
@@ -212,8 +206,8 @@ namespace ls{
 			//! @brief Inserts an value on the specified location.
 			iterator insert(const_iterator itr, const T& value);
 
-			//! @brief
-//			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
+			//! @brief Inserts an entire initializer list starting on pos.
+			iterator insert(const_iterator pos, std::initializer_list<T> ilist);
 
 			//! @brief Erase node existing on specified location.
 			iterator erase(const_iterator itr);
