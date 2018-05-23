@@ -1,6 +1,7 @@
-# List Implementation
+# TAD-List Implementation. Project Evaluation
 
 ## Description
+
 Repo for a entire implementation of List library.
 This project was done as designated by our professor of Estrutura de Dados Básica 1 (EDBI) at Universidade Federal do Rio Grande do Norte([UFRN](https://ufrn.br)).
 
@@ -23,6 +24,7 @@ $ make clean
 ```
 
 ## How to execute
+
 Now, we show how to run the program
 ```bash
 # To execute program:
@@ -30,6 +32,7 @@ $ ./list
 ```
 
 ## Implementation
+
 The whole code was made based on the std List, so the objective of this implementations is to recreate the experience that an usual client has when using the List's lib.
 
 
@@ -38,5 +41,3 @@ The whole code was made based on the std List, so the objective of this implemen
 Program developed by [_Daniel Oliveira Guerra_](https://github.com/Codigos-de-Guerra) (*daniel.guerra13@hotmail.com*) and [_Oziel Alves_](https://github.com/ozielalves) (*ozielalves@ufrn.edu.br*), 2018.1
 
 &copy; Macrosoft S.A 2018.
-
-
