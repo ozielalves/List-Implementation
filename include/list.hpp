@@ -54,16 +54,16 @@ namespace ls{
 					//! @details Current node data.  
 					const T & operator* () const;
 							
-					//! @brief Overloads the operator '++' (no parameter usage).
+					//! @brief Overloads the operator '++' (no parameter usage). ++it.
 					const_iterator & operator++ (void);
 						
-					//! @brief Overloads the operator '++' (parameter usage).
+					//! @brief Overloads the operator '++' (parameter usage). it++.
 					const_iterator operator++ (int);
 
-					//! @brief Overloads the operator '--' (no parameter usage).
+					//! @brief Overloads the operator '--' (no parameter usage). --it.
 					const_iterator & operator-- (void);
 
-					//! @brief Overloads the operator '--' (parameter usage).
+					//! @brief Overloads the operator '--' (parameter usage). it--.
 					const_iterator operator-- (int);
 
 					//! @brief Overloads the operator '+' (parameter usage).
@@ -100,16 +100,16 @@ namespace ls{
 					//! @brief Overloads the operator '*'.
 					T &operator* ();
 
-					//! @brief Overloads the operator '++' (no parameter usage).
+					//! @brief Overloads the operator '++' (no parameter usage). ++it.
 					iterator & operator++ (void);
 					
-					//! @brief Overloads the operator '++' (parameter usage).
+					//! @brief Overloads the operator '++' (parameter usage). it++.
 					iterator operator++ (int);
 
-					//! @brief Overloads the operator '--' (no parameter usage).
+					//! @brief Overloads the operator '--' (no parameter usage). --it.
 					iterator & operator-- (void);
 
-					//! @brief Overloads the operator '--' (no parameter usage).
+					//! @brief Overloads the operator '--' (parameter usage). it--.
 					iterator operator-- (int);
 
 					//! @brief Overloads the operator '+' (parameter usage).
@@ -196,7 +196,7 @@ namespace ls{
 
 /*----------------------[IV-a] Modifiers with Iterators----------------------*/
 
-			//! @brief
+			//! @brief Replaces the content of list with copies from a range [first, last).
 			template< class InItr >
 			void assign(InItr first, InItr last);
 		

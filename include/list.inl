@@ -280,12 +280,14 @@ namespace ls
 		return m_node->data;
 	}
 
+	// ++it
 	template< typename T >
 	typename List<T>::const_iterator & List<T>::const_iterator::operator++(void){
 		m_node = m_node->next;
 		return *this;
 	}
 
+	// it++
 	template< typename T >
 	typename List<T>::const_iterator List<T>::const_iterator::operator++(int){
 		const_iterator cpy(m_node);
@@ -293,12 +295,14 @@ namespace ls
 		return cpy;
 	}
 
+	// --it
 	template< typename T >
 	typename List<T>::const_iterator & List<T>::const_iterator::operator--(void){
 		m_node = m_node->prev;
 		return *this;
 	}
 
+	// it--
 	template< typename T >
 	typename List<T>::const_iterator List<T>::const_iterator::operator--(int){
 		const_iterator cpy(m_node);
